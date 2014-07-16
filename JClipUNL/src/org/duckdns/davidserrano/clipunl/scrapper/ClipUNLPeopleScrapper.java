@@ -14,7 +14,6 @@ import org.jsoup.select.Elements;
 
 public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
 
-	// TODO: me
 	public static List<ClipUNLPerson> getPeople(final Document document) {
 		final List<ClipUNLPerson> people = new ArrayList<>();
 		final Elements elements = document.select("table[cellpadding=3]");
