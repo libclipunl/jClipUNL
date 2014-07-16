@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 
-public class ClipUNLCurricularUnitImpl implements Serializable,
-		ClipUNLCurricularUnit {
+public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
+		Serializable, ClipUNLCurricularUnit {
+
 	private static final long serialVersionUID = 4968251116633463502L;
 
 	private ClipUNLPerson person;
@@ -24,6 +26,10 @@ public class ClipUNLCurricularUnitImpl implements Serializable,
 
 	private Map<String, ClipUNLDocument> documents;
 	private List<ClipUNLDocumentType> documentTypes;
+
+	public ClipUNLCurricularUnitImpl(ClipUNLSession session) {
+		super(session);
+	}
 
 	public ClipUNLPerson getPerson() {
 		return person;

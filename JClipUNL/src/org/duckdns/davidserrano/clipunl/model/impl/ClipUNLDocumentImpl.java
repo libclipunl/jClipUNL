@@ -3,11 +3,14 @@ package org.duckdns.davidserrano.clipunl.model.impl;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 
-public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
+public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
+		Serializable, ClipUNLDocument {
+
 	private static final long serialVersionUID = -8001382898325022999L;
 
 	private String oid;
@@ -19,9 +22,10 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 	private long size;
 	private String teacher;
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getOid()
-	 */
+	public ClipUNLDocumentImpl(ClipUNLSession session) {
+		super(session);
+	}
+
 	@Override
 	public String getOid() {
 		return oid;
@@ -40,9 +44,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.curricularUnit = curricularUnit;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getName()
-	 */
 	@Override
 	public String getName() {
 		return name;
@@ -52,9 +53,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getUrl()
-	 */
 	@Override
 	public String getUrl() {
 		return url;
@@ -64,9 +62,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.url = url;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getDocumentType()
-	 */
 	@Override
 	public ClipUNLDocumentType getDocumentType() {
 		return documentType;
@@ -76,9 +71,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.documentType = documentType;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getDate()
-	 */
 	@Override
 	public Date getDate() {
 		return date;
@@ -88,9 +80,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.date = date;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getSize()
-	 */
 	@Override
 	public long getSize() {
 		return size;
@@ -100,9 +89,6 @@ public class ClipUNLDocumentImpl implements Serializable, ClipUNLDocument {
 		this.size = size;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocument#getTeacher()
-	 */
 	@Override
 	public String getTeacher() {
 		return teacher;

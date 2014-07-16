@@ -47,10 +47,10 @@ public class ClipUNLSession extends ClipUNLScrapper implements Serializable {
 	private boolean login(String identifier, String password) {
 		final Map<String, String> data = new HashMap<>();
 		
-		data.put(ClipUNLConstants.CLIP_QS_PARAM_IDENTIFIER, identifier);
-		data.put(ClipUNLConstants.CLIP_QS_PARAM_PASSWORD, password);
+		data.put(ClipUNLConstants.CLIP_PARAM_IDENTIFIER, identifier);
+		data.put(ClipUNLConstants.CLIP_PARAM_PASSWORD, password);
 
-		lastDocument = getDocument(this, ClipUNLConstants.CLIP_LOGIN, data);
+		lastDocument = getDocument(this, ClipUNLConstants.CLIP_LOGIN_PATH, data);
 
 		fullName = ClipUNLUtil.getFullName(lastDocument);
 		

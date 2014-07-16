@@ -1,21 +1,27 @@
 package org.duckdns.davidserrano.clipunl.model.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
+import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLAcademicYearScrapper;
 
-public class ClipUNLPersonImpl implements Serializable, ClipUNLPerson {
+public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
+		ClipUNLPerson {
 	private static final long serialVersionUID = -6852564565366259034L;
-	
-	public String role;
-	public String url;
-	public String id;
-	public List<Integer> years;
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPerson#getRole()
-	 */
+	private String role;
+	private String url;
+	private String description;
+	private String id;
+
+	private List<ClipUNLAcademicYear> years;
+
+	public ClipUNLPersonImpl(final ClipUNLSession session) {
+		super(session);
+	}
+
 	@Override
 	public String getRole() {
 		return role;
@@ -25,22 +31,34 @@ public class ClipUNLPersonImpl implements Serializable, ClipUNLPerson {
 		this.role = role;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPerson#getUrl()
-	 */
 	@Override
-	public String getUrl() {
+	public String getURL() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		this.url = url;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPerson#getId()
-	 */
 	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public List<ClipUNLAcademicYear> getAcademicYears() {
+		if (years == null) {
+			years = ClipUNLAcademicYearScrapper.getAcademicYears(getSession(),
+					this);
+		}
+
+		return years;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -48,17 +66,4 @@ public class ClipUNLPersonImpl implements Serializable, ClipUNLPerson {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPerson#getYears()
-	 */
-	@Override
-	public List<Integer> getYears() {
-		return years;
-	}
-
-	public void setYears(List<Integer> years) {
-		this.years = years;
-	}
-
 }

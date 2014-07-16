@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNL;
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLPeopleScrapper;
 
@@ -35,13 +36,20 @@ public class ClipUNLListEvents {
 				System.out.println("Wrong identifier/password combination");
 				return;
 			}
-			
-			final List<ClipUNLPerson> people = ClipUNLPeopleScrapper.getPeople(session);
-			
+
+			final List<ClipUNLPerson> people = ClipUNLPeopleScrapper
+					.getPeople(session);
+
 			for (final ClipUNLPerson person : people) {
-				System.out.println(person.getId());
+				System.out.println(person.getDescription());
+
+				final List<ClipUNLAcademicYear> academicYears = person
+						.getAcademicYears();
+				for (final ClipUNLAcademicYear academicYear : academicYears) {
+					System.out.println("\t" + academicYear.getYear());
+				}
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

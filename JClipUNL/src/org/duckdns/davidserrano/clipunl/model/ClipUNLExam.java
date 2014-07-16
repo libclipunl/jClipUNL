@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.joda.time.DateTime;
 
-public interface ClipUNLEvaluation extends Serializable {
+public interface ClipUNLExam extends Serializable {
 
 	public abstract ClipUNLCurricularUnit getCurricularUnit();
 

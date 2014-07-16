@@ -1,20 +1,23 @@
 package org.duckdns.davidserrano.clipunl.model.impl;
 
+import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLEvaluation;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLExam;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.joda.time.DateTime;
 
-public class ClipUNLEvaluationImpl implements ClipUNLEvaluation {
+public class ClipUNLExamImpl extends ClipUNLBaseModel implements ClipUNLExam {
+
 	private static final long serialVersionUID = -7719774857248111839L;
-	
+
 	private ClipUNLCurricularUnit curricularUnit;
 	private ClipUNLExamSeason examType;
 	private DateTime date;
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLEvaluation#getCurricularUnit()
-	 */
+	public ClipUNLExamImpl(ClipUNLSession session) {
+		super(session);
+	}
+
 	@Override
 	public ClipUNLCurricularUnit getCurricularUnit() {
 		return curricularUnit;
@@ -24,9 +27,6 @@ public class ClipUNLEvaluationImpl implements ClipUNLEvaluation {
 		this.curricularUnit = curricularUnit;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLEvaluation#getExamType()
-	 */
 	@Override
 	public ClipUNLExamSeason getExamType() {
 		return examType;
@@ -36,9 +36,6 @@ public class ClipUNLEvaluationImpl implements ClipUNLEvaluation {
 		this.examType = examType;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.duckdns.davidserrano.clipunl.model.impl.ClipUNLEvaluation#getDate()
-	 */
 	@Override
 	public DateTime getDate() {
 		return date;

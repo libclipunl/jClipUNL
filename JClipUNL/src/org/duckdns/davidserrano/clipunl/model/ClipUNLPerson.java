@@ -7,10 +7,12 @@ public interface ClipUNLPerson extends Serializable {
 
 	public abstract String getRole();
 
-	public abstract String getUrl();
+	public abstract String getURL();
+
+	public abstract String getDescription();
 
 	public abstract String getId();
 
-	public abstract List<Integer> getYears();
+	public abstract List<ClipUNLAcademicYear> getAcademicYears();
 
 }
