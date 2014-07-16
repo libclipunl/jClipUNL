@@ -16,25 +16,14 @@ public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
 
 	public static List<ClipUNLPerson> getPeople(final Document document) {
 		final List<ClipUNLPerson> people = new ArrayList<>();
-		final Elements elements = document.select("table[cellpadding=3]");
 
-		Element studentTable = null;
+		// Find the student anchors
+		final Elements anchors = document
+				.select("table:has(span.h3:containsOwn("
+						+ ClipUNLConstants.CLIP_STUDENT_LABEL + ")) "
+						+ "a[href^=" + ClipUNLConstants.CLIP_STUDENT + "?]");
 
-		for (Element element : elements) {
-			if (element.select("a").get(0).text()
-					.equals(ClipUNLConstants.CLIP_STUDENT_LABEL)) {
-				studentTable = element;
-				break;
-			}
-		}
-
-		if (studentTable == null) {
-			throw new PageChangedException();
-		}
-
-		final Elements anchors = studentTable.select(":not(:first-child) a[href^="
-				+ ClipUNLConstants.CLIP_STUDENT + "]");
-
+		// There must be at least one
 		if (anchors.size() == 0) {
 			throw new PageChangedException();
 		}
