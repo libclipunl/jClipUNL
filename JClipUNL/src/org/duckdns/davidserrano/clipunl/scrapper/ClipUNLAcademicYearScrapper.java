@@ -49,20 +49,18 @@ public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
 			if (element.select("span").size() > 0) {
 				continue;
 			}
-			
+
 			final ClipUNLAcademicYearImpl academicYear = new ClipUNLAcademicYearImpl(
 					session);
 
-			
 			final String url = element.attr("href");
 			final String year;
 
 			try {
 				final String qs = url.split("\\?")[1];
-				final Map<String, List<String>> qsMap = ClipUNLUtil
+				final Map<String, String> qsMap = ClipUNLUtil
 						.splitQueryString(qs);
-				year = qsMap.get(ClipUNLConstants.CLIP_PARAM_ACADEMIC_YEAR)
-						.get(0);
+				year = qsMap.get(ClipUNLConstants.CLIP_PARAM_ACADEMIC_YEAR);
 			} catch (IndexOutOfBoundsException e) {
 				throw new PageChangedException(
 						ClipUNLConstants.CLIP_STUDENT_PATH);

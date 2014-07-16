@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import org.duckdns.davidserrano.clipunl.ClipUNL;
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.ClipUNLSessionFactory;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLPeopleScrapper;
@@ -47,8 +47,8 @@ public class ClipUNLListEvents {
 			System.out.println("Password: ");
 			password = reader.readLine();
 
-			session = ClipUNL.getSession(identifier, password);
-
+			session = ClipUNLSessionFactory.getSession(identifier, password);
+			
 			if (session.isLoggedIn()) {
 				System.out.println("Welcome " + session.getFullName());
 			} else {

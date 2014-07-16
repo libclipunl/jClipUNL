@@ -49,11 +49,9 @@ public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
 
 			try {
 				final String qs = url.split("\\?")[1];
-				final Map<String, List<String>> qsMap = ClipUNLUtil
+				final Map<String, String> qsMap = ClipUNLUtil
 						.splitQueryString(qs);
-				id = qsMap.get(ClipUNLConstants.CLIP_PARAM_STUDENT).get(0);
-			} catch (IndexOutOfBoundsException e) {
-				throw new PageChangedException(ClipUNLConstants.CLIP_LOGIN_PATH);
+				id = qsMap.get(ClipUNLConstants.CLIP_PARAM_STUDENT);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				throw new PageChangedException(ClipUNLConstants.CLIP_LOGIN_PATH);
