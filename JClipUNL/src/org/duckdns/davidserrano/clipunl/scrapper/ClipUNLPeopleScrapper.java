@@ -32,16 +32,19 @@ public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
 		final List<ClipUNLPerson> people = new ArrayList<>();
 
 		// Find the student anchors
-		final Elements anchors = document.select(PEOPLE_ANCHOR_SELECTOR);
+		final Elements elements = document.select(PEOPLE_ANCHOR_SELECTOR);
 
 		// There must be at least one
-		if (anchors.size() == 0) {
+		if (elements.size() == 0) {
 			throw new PageChangedException(ClipUNLConstants.CLIP_LOGIN_PATH);
 		}
 
-		for (final Element anchor : anchors) {
-			final String description = anchor.text();
-			final String url = anchor.attr("href");
+		for (final Element element : elements) {
+			if (element.select("span").size() > 0) {
+				continue;
+			}
+			final String description = element.text();
+			final String url = element.attr("href");
 			final String id;
 
 			try {

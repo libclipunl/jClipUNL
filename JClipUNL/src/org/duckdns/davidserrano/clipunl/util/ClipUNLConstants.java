@@ -31,5 +31,8 @@ public class ClipUNLConstants {
 
 	public static final String CLIP_DL_IMAGE = "/imagem/geral/download.gif";
 	
+	// CLIP *is* slow...
+	public static final int CLIP_NETWORK_TIMEOUT = 60000;
+	
 
 }

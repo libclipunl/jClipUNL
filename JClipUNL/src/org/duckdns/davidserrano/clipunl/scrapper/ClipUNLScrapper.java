@@ -21,11 +21,19 @@ public class ClipUNLScrapper {
 			final Method method) {
 
 		try {
+			//System.out.println(">> " + method + " " + url + " " + data);
+
 			final Response response = Jsoup
-					.connect(ClipUNLConstants.CLIP_SERVER + url).data(data)
+					.connect(ClipUNLConstants.CLIP_SERVER + url).timeout(ClipUNLConstants.CLIP_NETWORK_TIMEOUT).data(data)
 					.cookies(session.getCookies()).execute().method(method);
 
-			session.setCookies(response.cookies());
+			
+			final Map<String, String> cookies = response.cookies();
+
+			if (cookies.size() > 0) {
+				session.setCookies(response.cookies());
+			}
+
 			lastDocument = response.parse();
 			return lastDocument;
 
@@ -42,7 +50,8 @@ public class ClipUNLScrapper {
 
 	protected static Document getDocument(final ClipUNLSession session,
 			final String url) {
-		return getDocument(session, url, new HashMap<String, String>(), Method.GET);
+		return getDocument(session, url, new HashMap<String, String>(),
+				Method.GET);
 	}
 
 	protected static Document getLastDocument() {

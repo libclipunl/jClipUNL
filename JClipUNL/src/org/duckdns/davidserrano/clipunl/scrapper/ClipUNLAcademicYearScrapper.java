@@ -23,7 +23,7 @@ public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
 	private final static String ACADEMIC_YEARS_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_ACADEMIC_YEAR_LABEL
 			+ ")) a[href^="
-			+ ClipUNLConstants.CLIP_STUDENT_ACADEMIC_YEAR_PATH + "?]";;
+			+ ClipUNLConstants.CLIP_STUDENT_ACADEMIC_YEAR_PATH + "?]";
 
 	public static List<ClipUNLAcademicYear> getAcademicYears(
 			ClipUNLSession session, String personId) {
@@ -40,15 +40,20 @@ public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
 
 		final Elements academicYearAnchors = document
 				.select(ACADEMIC_YEARS_ANCHOR_SELECTOR);
-		
+
 		if (academicYearAnchors.size() == 0) {
 			throw new PageChangedException(ClipUNLConstants.CLIP_STUDENT_PATH);
 		}
 
 		for (final Element element : academicYearAnchors) {
+			if (element.select("span").size() > 0) {
+				continue;
+			}
+			
 			final ClipUNLAcademicYearImpl academicYear = new ClipUNLAcademicYearImpl(
 					session);
 
+			
 			final String url = element.attr("href");
 			final String year;
 
@@ -59,10 +64,12 @@ public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
 				year = qsMap.get(ClipUNLConstants.CLIP_PARAM_ACADEMIC_YEAR)
 						.get(0);
 			} catch (IndexOutOfBoundsException e) {
-				throw new PageChangedException(ClipUNLConstants.CLIP_STUDENT_PATH);
+				throw new PageChangedException(
+						ClipUNLConstants.CLIP_STUDENT_PATH);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
-				throw new PageChangedException(ClipUNLConstants.CLIP_STUDENT_PATH);
+				throw new PageChangedException(
+						ClipUNLConstants.CLIP_STUDENT_PATH);
 			}
 
 			academicYear.setDescription(element.text());
@@ -74,10 +81,10 @@ public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
 
 		return years;
 	}
-	
+
 	public static List<ClipUNLAcademicYear> getAcademicYears(
 			ClipUNLSession session, ClipUNLPerson person) {
-		
+
 		return getAcademicYears(session, person.getId());
 	}
 }

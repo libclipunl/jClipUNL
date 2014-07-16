@@ -14,22 +14,24 @@ public class ClipUNLSession extends ClipUNLScrapper implements Serializable {
 	private Map<String, String> cookies;
 
 	private String fullName;
-	private boolean isLoggedIn;
 
 	private ClipUNLSession() {
 		super();
 		cookies = Collections.emptyMap();
 		fullName = null;
-		isLoggedIn = false;
 	}
 
 	public ClipUNLSession(String identifier, String password) {
 		this();
-		isLoggedIn = login(identifier, password);
+		login(identifier, password);
 	}
 
 	public boolean isLoggedIn() {
-		return isLoggedIn;
+		if (lastDocument != null) {
+			return ClipUNLUtil.getFullName(lastDocument) != null;
+		} else {
+			return false;
+		}
 	}
 
 	public void setCookies(Map<String, String> cookies) {
@@ -41,26 +43,19 @@ public class ClipUNLSession extends ClipUNLScrapper implements Serializable {
 	}
 
 	public String getFullName() {
+		if (fullName == null) {
+			fullName = ClipUNLUtil.getFullName(lastDocument);
+		}
+
 		return fullName;
 	}
 
-	private boolean login(String identifier, String password) {
+	private void login(String identifier, String password) {
 		final Map<String, String> data = new HashMap<>();
-		
+
 		data.put(ClipUNLConstants.CLIP_PARAM_IDENTIFIER, identifier);
 		data.put(ClipUNLConstants.CLIP_PARAM_PASSWORD, password);
 
-		lastDocument = getDocument(this, ClipUNLConstants.CLIP_LOGIN_PATH, data);
-
-		fullName = ClipUNLUtil.getFullName(lastDocument);
-		
-		final boolean isLoggedIn;
-		if (fullName != null) {
-			isLoggedIn = true;
-		} else {
-			isLoggedIn = false;
-		}
-
-		return isLoggedIn;
+		getDocument(this, ClipUNLConstants.CLIP_LOGIN_PATH, data);
 	}
 }
