@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPersonImpl;
@@ -43,6 +44,10 @@ public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
 	}
 
 	public static List<ClipUNLPerson> getPeople(final ClipUNLSession session) {
+		if (!session.isLoggedIn()) {
+			throw new NotLoggedInException();
+		}
+		
 		final Document document = getDocument(session,
 				ClipUNLConstants.CLIP_LOGIN);
 
