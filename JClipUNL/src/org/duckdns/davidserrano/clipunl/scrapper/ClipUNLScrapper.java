@@ -26,7 +26,6 @@ public class ClipUNLScrapper {
 			final Response response = Jsoup
 					.connect(ClipUNLConstants.CLIP_SERVER + url).timeout(ClipUNLConstants.CLIP_NETWORK_TIMEOUT).data(data)
 					.cookies(session.getCookies()).execute().method(method);
-
 			
 			final Map<String, String> cookies = response.cookies();
 

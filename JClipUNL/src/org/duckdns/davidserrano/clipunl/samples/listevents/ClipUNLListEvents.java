@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.sample.listevents;
+package org.duckdns.davidserrano.clipunl.samples.listevents;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +12,25 @@ import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLPeopleScrapper;
 
 public class ClipUNLListEvents {
+	public static final void listAcademicYears(ClipUNLPerson person) {
+		final List<ClipUNLAcademicYear> academicYears = person
+				.getAcademicYears();
+		for (final ClipUNLAcademicYear academicYear : academicYears) {
+			System.out.println("\t" + academicYear.getDescription());
+		}
+
+	}
+
+	public static final void listPeople(ClipUNLSession session) {
+		final List<ClipUNLPerson> people = ClipUNLPeopleScrapper
+				.getPeople(session);
+
+		for (final ClipUNLPerson person : people) {
+			System.out.println(person.getDescription());
+			listAcademicYears(person);
+		}
+	}
+
 	public static final void main(final String args[]) {
 
 		final String identifier;
@@ -37,18 +56,7 @@ public class ClipUNLListEvents {
 				return;
 			}
 
-			final List<ClipUNLPerson> people = ClipUNLPeopleScrapper
-					.getPeople(session);
-
-			for (final ClipUNLPerson person : people) {
-				System.out.println(person.getDescription());
-
-				final List<ClipUNLAcademicYear> academicYears = person
-						.getAcademicYears();
-				for (final ClipUNLAcademicYear academicYear : academicYears) {
-					System.out.println("\t" + academicYear.getYear());
-				}
-			}
+			listPeople(session);
 
 		} catch (IOException e) {
 			e.printStackTrace();
