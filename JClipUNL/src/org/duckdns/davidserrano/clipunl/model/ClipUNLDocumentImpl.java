@@ -52,11 +52,11 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 	}
 
 	@Override
-	public String getUrl() {
+	public String getURL() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		this.url = url;
 	}
 

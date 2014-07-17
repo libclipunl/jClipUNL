@@ -13,7 +13,7 @@ public interface ClipUNLDocument extends Serializable {
 
 	public abstract String getName();
 
-	public abstract String getUrl();
+	public abstract String getURL();
 
 	public abstract ClipUNLDocumentType getDocumentType();
 
