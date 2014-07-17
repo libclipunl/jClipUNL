@@ -1,6 +1,5 @@
 package org.duckdns.davidserrano.clipunl.scraper;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,8 @@ import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPersonImpl;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.nodes.Document;
@@ -20,15 +21,14 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 	private final static String PEOPLE_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_STUDENT_LABEL
 			+ ")) a[href^="
-			+ ClipUNLConstants.CLIP_STUDENT_PATH + "?]";
+			+ ClipUNLPath.STUDENT.getCode() + "?]";
 
 	public static List<ClipUNLPerson> getPeople(final ClipUNLSession session) {
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}
 
-		final Document document = getDocument(session,
-				ClipUNLConstants.CLIP_LOGIN_PATH);
+		final Document document = getDocument(session, ClipUNLPath.HOME);
 		final List<ClipUNLPerson> people = new ArrayList<>();
 
 		// Find the student anchors
@@ -36,7 +36,7 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 
 		// There must be at least one
 		if (elements.size() == 0) {
-			throw new PageChangedException(ClipUNLConstants.CLIP_LOGIN_PATH);
+			throw new PageChangedException(ClipUNLPath.HOME);
 		}
 
 		for (final Element element : elements) {
@@ -48,13 +48,11 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 			final String id;
 
 			try {
-				final String qs = url.split("\\?")[1];
-				final Map<String, String> qsMap = ClipUNLUtil
-						.splitQueryString(qs);
-				id = qsMap.get(ClipUNLConstants.CLIP_PARAM_STUDENT);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				throw new PageChangedException(ClipUNLConstants.CLIP_LOGIN_PATH);
+				final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil
+						.splitQueryString(url);
+				id = qsMap.get(ClipUNLParameterType.STUDENT);
+			} catch (Exception e) {
+				throw new PageChangedException(ClipUNLPath.HOME);
 			}
 
 			final ClipUNLPersonImpl person = new ClipUNLPersonImpl(session);

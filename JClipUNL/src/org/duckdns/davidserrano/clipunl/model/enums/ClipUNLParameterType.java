@@ -1,11 +1,15 @@
 package org.duckdns.davidserrano.clipunl.model.enums;
 
 public enum ClipUNLParameterType {
+	IDENTIFIER("identificador"),
+	
+	PASSWORD("senha"),
+	
 	UNIT("unidade"),
 	
 	CURRICULAR_UNIT("unidade_curricular"),
 	
-	YEAR("ano_lectivo"),
+	ACADEMIC_YEAR("ano_lectivo"),
 	
 	PERIOD("período_lectivo"),
 	
@@ -13,7 +17,7 @@ public enum ClipUNLParameterType {
 	
 	STUDENT("aluno"),
 	
-	UNIT_DOCTYPE("tipo_de_document_unidade");
+	UNIT_DOCTYPE("tipo_de_document_unidade"), ;
 	
 	private String code;
 	
@@ -21,7 +25,7 @@ public enum ClipUNLParameterType {
 		this.code = value;
 	}
 	
-	public ClipUNLParameterType from(final String code) {
+	public static ClipUNLParameterType from(final String code) {
 		for (final ClipUNLParameterType typ : ClipUNLParameterType.values()) {
 			if (typ.getCode().equals(code)) {
 				return typ;

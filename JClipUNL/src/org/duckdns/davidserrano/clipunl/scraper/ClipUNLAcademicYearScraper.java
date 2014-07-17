@@ -1,8 +1,7 @@
 package org.duckdns.davidserrano.clipunl.scraper;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +11,8 @@ import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYearImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.Connection.Method;
@@ -23,26 +24,27 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 	private final static String ACADEMIC_YEARS_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_ACADEMIC_YEAR_LABEL
 			+ ")) a[href^="
-			+ ClipUNLConstants.CLIP_STUDENT_ACADEMIC_YEAR_PATH + "?]";
+			+ ClipUNLPath.STUDENT_ACADEMIC_YEAR.getCode() + "?]";
 
 	public static List<ClipUNLAcademicYear> getAcademicYears(
-			ClipUNLSession session, String personId) {
+			ClipUNLSession session, ClipUNLPerson person) {
+
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}
 
 		final List<ClipUNLAcademicYear> years = new ArrayList<ClipUNLAcademicYear>();
-		final Map<String, String> data = new HashMap<String, String>();
+		final Map<ClipUNLParameterType, String> data = new LinkedHashMap<ClipUNLParameterType, String>();
 
-		data.put(ClipUNLConstants.CLIP_PARAM_STUDENT, personId);
-		final Document document = getDocument(session,
-				ClipUNLConstants.CLIP_STUDENT_PATH, data, Method.GET);
+		data.put(ClipUNLParameterType.STUDENT, person.getId());
+		final Document document = getDocument(session, ClipUNLPath.STUDENT,
+				data, Method.GET);
 
 		final Elements academicYearAnchors = document
 				.select(ACADEMIC_YEARS_ANCHOR_SELECTOR);
 
 		if (academicYearAnchors.size() == 0) {
-			throw new PageChangedException(ClipUNLConstants.CLIP_STUDENT_PATH);
+			throw new PageChangedException(ClipUNLPath.STUDENT);
 		}
 
 		for (final Element element : academicYearAnchors) {
@@ -57,19 +59,14 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 			final String year;
 
 			try {
-				final String qs = url.split("\\?")[1];
-				final Map<String, String> qsMap = ClipUNLUtil
-						.splitQueryString(qs);
-				year = qsMap.get(ClipUNLConstants.CLIP_PARAM_ACADEMIC_YEAR);
-			} catch (IndexOutOfBoundsException e) {
-				throw new PageChangedException(
-						ClipUNLConstants.CLIP_STUDENT_PATH);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				throw new PageChangedException(
-						ClipUNLConstants.CLIP_STUDENT_PATH);
+				final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil
+						.splitQueryString(url);
+				year = qsMap.get(ClipUNLParameterType.ACADEMIC_YEAR);
+			} catch (Exception e) {
+				throw new PageChangedException(ClipUNLPath.STUDENT);
 			}
 
+			academicYear.setPerson(person);
 			academicYear.setDescription(element.text());
 			academicYear.setURL(url);
 			academicYear.setYear(year);
@@ -78,11 +75,5 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 		}
 
 		return years;
-	}
-
-	public static List<ClipUNLAcademicYear> getAcademicYears(
-			ClipUNLSession session, ClipUNLPerson person) {
-
-		return getAcademicYears(session, person.getId());
 	}
 }

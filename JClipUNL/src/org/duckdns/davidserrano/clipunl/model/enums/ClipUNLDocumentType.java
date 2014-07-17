@@ -25,7 +25,7 @@ public enum ClipUNLDocumentType {
 		this.description = description;
 	}
 
-	public ClipUNLDocumentType from(final String code) {
+	public static ClipUNLDocumentType from(final String code) {
 		for (final ClipUNLDocumentType typ : ClipUNLDocumentType.values()) {
 			if (typ.getCode().equals(code)) {
 				return typ;

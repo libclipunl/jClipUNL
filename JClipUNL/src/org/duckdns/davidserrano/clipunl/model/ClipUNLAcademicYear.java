@@ -11,4 +11,6 @@ public interface ClipUNLAcademicYear extends Serializable {
 	abstract public String getDescription();
 
 	abstract public List<ClipUNLCurricularUnit> getCurricularUnits();
+	
+	abstract public ClipUNLPerson getPerson();
 }

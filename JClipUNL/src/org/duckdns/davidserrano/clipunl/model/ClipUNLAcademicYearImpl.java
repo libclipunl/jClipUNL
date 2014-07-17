@@ -3,14 +3,17 @@ package org.duckdns.davidserrano.clipunl.model;
 import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLCurricularUnitScraper;
 
 public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 		ClipUNLAcademicYear {
+
 	private static final long serialVersionUID = 8880192762897160163L;
-	
+
 	private String year;
 	private String url;
 	private String description;
+	private ClipUNLPerson person;
 
 	public ClipUNLAcademicYearImpl(ClipUNLSession session) {
 		super(session);
@@ -40,9 +43,17 @@ public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 		this.description = description;
 	}
 
+	public ClipUNLPerson getPerson() {
+		return person;
+	}
+
+	public void setPerson(ClipUNLPerson person) {
+		this.person = person;
+	}
+
 	@Override
 	public List<ClipUNLCurricularUnit> getCurricularUnits() {
-		// TODO Auto-generated method stub
-		return null;
+		return ClipUNLCurricularUnitScraper.getCurricularUnits(getSession(), this);
 	}
+
 }
