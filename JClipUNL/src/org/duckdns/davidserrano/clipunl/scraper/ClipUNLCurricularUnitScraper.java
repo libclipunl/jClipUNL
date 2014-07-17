@@ -29,7 +29,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 	private final static String CURRICULAR_UNITS_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CURRICULAR_UNITS_LABEL
 			+ ")) a[href^="
-			+ ClipUNLPath.STUDENT_CURRICULAR_UNITS.getCode() + "?]";
+			+ ClipUNLPath.STUDENT_CURRICULAR_UNITS.getPath() + "?]";
 
 	public static List<ClipUNLCurricularUnit> getCurricularUnits(
 			final ClipUNLAcademicYear academicYear) {

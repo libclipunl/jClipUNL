@@ -64,4 +64,5 @@ public class ClipUNLPersonImpl extends ClipUNLBaseModelImpl implements
 	public void setId(String id) {
 		this.id = id;
 	}
+
 }

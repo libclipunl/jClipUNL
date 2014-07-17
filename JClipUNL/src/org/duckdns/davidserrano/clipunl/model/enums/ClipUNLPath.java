@@ -1,32 +1,34 @@
 package org.duckdns.davidserrano.clipunl.model.enums;
 
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
+import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 
 public enum ClipUNLPath {
 	OBJECT("/objecto"),
 
 	HOME("/utente/eu"),
 
-	STUDENT(HOME.getCode() + "/aluno"),
+	STUDENT(HOME.getPath() + "/aluno"),
 
-	STUDENT_ACADEMIC_YEAR(STUDENT.getCode() + "/ano_lectivo"),
-	
-	STUDENT_CURRICULAR_UNITS(STUDENT_ACADEMIC_YEAR.getCode() + "/unidades"),
+	STUDENT_ACADEMIC_YEAR(STUDENT.getPath() + "/ano_lectivo"),
 
-	STUDENT_DOCUMENTS(STUDENT_CURRICULAR_UNITS.getCode()
+	STUDENT_CURRICULAR_UNITS(STUDENT_ACADEMIC_YEAR.getPath() + "/unidades"),
+
+	STUDENT_DOCUMENTS(STUDENT_CURRICULAR_UNITS.getPath()
 			+ "/unidade_curricular/actividade/documentos"),
 
-	STUDENT_EXAMS(STUDENT_ACADEMIC_YEAR.getCode() + "/calendário");
+	STUDENT_CALENDAR(STUDENT_ACADEMIC_YEAR.getPath() + "/"
+			+ ClipUNLUtil.encode("calendário"));
 
-	private String code;
+	private String path;
 
-	ClipUNLPath(final String value) {
-		this.code = value;
+	ClipUNLPath(final String path) {
+		this.path = path;
 	}
 
-	public static ClipUNLPath from(final String code) {
+	public static ClipUNLPath from(final String path) {
 		for (final ClipUNLPath typ : ClipUNLPath.values()) {
-			if (typ.getCode().equals(code)) {
+			if (typ.getPath().equals(path)) {
 				return typ;
 			}
 		}
@@ -34,11 +36,11 @@ public enum ClipUNLPath {
 		return null;
 	}
 
-	public String getCode() {
-		return code;
+	public String getPath() {
+		return path;
 	}
 
 	public String getURL() {
-		return ClipUNLConstants.CLIP_SERVER + getCode();
+		return ClipUNLConstants.CLIP_SERVER + getPath();
 	}
 }

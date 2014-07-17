@@ -21,7 +21,7 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 	private final static String PEOPLE_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_STUDENT_LABEL
 			+ ")) a[href^="
-			+ ClipUNLPath.STUDENT.getCode() + "?]";
+			+ ClipUNLPath.STUDENT.getPath() + "?]";
 
 	public static List<ClipUNLPerson> getPeople(final ClipUNLSession session) {
 		if (!session.isLoggedIn()) {

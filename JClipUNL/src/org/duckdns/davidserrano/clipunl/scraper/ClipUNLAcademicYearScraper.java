@@ -24,7 +24,7 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 	private final static String ACADEMIC_YEARS_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_ACADEMIC_YEAR_LABEL
 			+ ")) a[href^="
-			+ ClipUNLPath.STUDENT_ACADEMIC_YEAR.getCode() + "?]";
+			+ ClipUNLPath.STUDENT_ACADEMIC_YEAR.getPath() + "?]";
 
 	public static List<ClipUNLAcademicYear> getAcademicYears(ClipUNLPerson person) {
 

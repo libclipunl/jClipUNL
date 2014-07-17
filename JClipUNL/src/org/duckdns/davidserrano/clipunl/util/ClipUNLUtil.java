@@ -26,23 +26,16 @@ public class ClipUNLUtil {
 		String queryString = "";
 
 		for (final Entry<ClipUNLParameterType, String> entry : map.entrySet()) {
-			try {
-				final String key = URLEncoder.encode(entry.getKey().getCode(),
-						ClipUNLConstants.CLIP_ENCODING);
+			final String key = encode(entry.getKey().getCode());
 
-				final String value = URLEncoder.encode(entry.getValue(),
-						ClipUNLConstants.CLIP_ENCODING);
-				
-				final String pair = key + "=" + value;
-				
-				if (queryString.isEmpty()) {
-					queryString = pair;
-				} else {
-					queryString += "&" + pair;
-				}
-				
-			} catch (UnsupportedEncodingException e) {
-				return null;
+			final String value = encode(entry.getValue());
+
+			final String pair = key + "=" + value;
+
+			if (queryString.isEmpty()) {
+				queryString = pair;
+			} else {
+				queryString += "&" + pair;
 			}
 		}
 
@@ -77,5 +70,13 @@ public class ClipUNLUtil {
 		}
 		return query_pairs;
 
+	}
+
+	public static String encode(String in) {
+		try {
+			return URLEncoder.encode(in, ClipUNLConstants.CLIP_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			return in;
+		}
 	}
 }

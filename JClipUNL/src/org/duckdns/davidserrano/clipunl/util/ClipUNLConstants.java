@@ -13,4 +13,7 @@ public class ClipUNLConstants {
 	// CLIP *is* slow...
 	public static final int CLIP_NETWORK_TIMEOUT = 60000;
 
+	public static final String CLIP_DATE_FORMAT = "yyyy-MM-dd";
+	public static final String CLIP_DATETIME_FORMAT = "yyyy-MM-dd kk:mm";
+	
 }

@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.samples.listevents;
+package org.duckdns.davidserrano.clipunl.samples.listfiles;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLPeopleScraper;
 
-public class ClipUNLListEvents {
+public class ClipUNLListFiles {
 
 	private static void listDocuments(ClipUNLCurricularUnit curricularUnit) {
 		final Map<ClipUNLDocumentType, List<ClipUNLDocument>> documentsByType = curricularUnit

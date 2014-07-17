@@ -24,7 +24,7 @@ import org.jsoup.select.Elements;
 
 public class ClipUNLDocumentScraper extends ClipUNLScraper {
 	private final static String DOCUMENT_LINES_SELECTOR = "table tr:has(td a[href^="
-			+ ClipUNLPath.OBJECT.getCode()
+			+ ClipUNLPath.OBJECT.getPath()
 			+ "] img[src="
 			+ ClipUNLConstants.CLIP_DL_IMAGE + "])";
 
