@@ -14,7 +14,6 @@ import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
-import org.duckdns.davidserrano.clipunl.scraper.ClipUNLPeopleScraper;
 
 public class ClipUNLListFiles {
 

@@ -26,7 +26,7 @@ public class ClipUNLDocumentScraper extends ClipUNLScraper {
 	private final static String DOCUMENT_LINES_SELECTOR = "table tr:has(td a[href^="
 			+ ClipUNLPath.OBJECT.getPath()
 			+ "] img[src="
-			+ ClipUNLConstants.CLIP_DL_IMAGE + "])";
+			+ ClipUNLConstants.CLIP_DOWNLOAD_IMAGE + "])";
 
 	public static List<ClipUNLDocument> getDocuments(
 			final ClipUNLCurricularUnit curricularUnit,

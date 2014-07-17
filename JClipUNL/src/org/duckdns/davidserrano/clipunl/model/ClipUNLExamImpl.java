@@ -1,8 +1,15 @@
 package org.duckdns.davidserrano.clipunl.model;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLExamScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
+import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.format.DateTimeFormat;
@@ -12,9 +19,14 @@ public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements
 
 	private static final long serialVersionUID = -7719774857248111839L;
 
+	private ClipUNLAcademicYear academicYear;
+	private ClipUNLPeriod period;
 	private String curricularUnitName;
 	private ClipUNLExamSeason examSeason;
 	private Interval interval;
+	private List<String> locations;
+	private String url;
+	private String id;
 
 	public ClipUNLExamImpl(ClipUNLSession session) {
 		super(session);
@@ -47,9 +59,9 @@ public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements
 		String[] pieces = dateInterval.split(" ");
 		String date = pieces[0];
 		String[] timePieces = pieces[1].split("-");
-		
-		timePieces[0] = timePieces[0].replaceAll("\u00a0","");
-		timePieces[1] = timePieces[1].replaceAll("\u00a0","");
+
+		timePieces[0] = timePieces[0].replaceAll("\u00a0", "");
+		timePieces[1] = timePieces[1].replaceAll("\u00a0", "");
 
 		DateTime start = DateTimeFormat.forPattern(
 				ClipUNLConstants.CLIP_DATETIME_FORMAT).parseDateTime(
@@ -60,5 +72,53 @@ public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements
 				date + " " + timePieces[1]);
 
 		interval = new Interval(start, end);
+	}
+
+	@Override
+	public List<String> getLocations() {
+		if (locations == null) {
+			locations = ClipUNLExamScraper.getLocations(this);
+		}
+
+		return locations;
+	}
+
+	public void setAcademicYear(ClipUNLAcademicYear academicYear) {
+		this.academicYear = academicYear;
+	}
+
+	@Override
+	public ClipUNLAcademicYear getAcademicYear() {
+		return academicYear;
+	}
+
+	@Override
+	public String getURL() {
+		return url;
+	}
+
+	public void setURL(String url) {
+		this.url = url;
+		
+		try {
+			final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil.splitQueryString(url);
+		
+			id = qsMap.get(ClipUNLParameterType.DETAILS);
+		} catch (UnsupportedEncodingException e) {
+		}
+	}
+
+	@Override
+	public ClipUNLPeriod getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(ClipUNLPeriod period) {
+		this.period = period;
+	}
+	
+	@Override
+	public String getId() {
+		return id;
 	}
 }

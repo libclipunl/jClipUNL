@@ -26,6 +26,10 @@ public class ClipUNLListExams {
 							ClipUNLConstants.CLIP_DATETIME_FORMAT).print(
 							interval.getStart()) + " "
 					+ exam.getCurricularUnitName());
+
+			for (final String location : exam.getLocations()) {
+				System.out.println("\t\t\t* " + location);
+			}
 		}
 	}
 

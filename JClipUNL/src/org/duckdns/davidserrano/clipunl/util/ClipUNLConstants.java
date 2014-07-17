@@ -8,7 +8,8 @@ public class ClipUNLConstants {
 	public static final String CLIP_ACADEMIC_YEAR_LABEL = "Ano lectivo";
 	public static final String CURRICULAR_UNITS_LABEL = "Unidades curriculares";
 
-	public static final String CLIP_DL_IMAGE = "/imagem/geral/download.gif";
+	public static final String CLIP_DOWNLOAD_IMAGE = "/imagem/geral/download.gif";
+	public static final String CLIP_ZOOM_IN_IMAGE = "/imagem/petisco/m%F3dulo/browser/zoom-in.gif";
 
 	// CLIP *is* slow...
 	public static final int CLIP_NETWORK_TIMEOUT = 60000;
