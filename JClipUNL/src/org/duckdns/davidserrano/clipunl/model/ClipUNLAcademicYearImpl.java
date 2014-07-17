@@ -15,8 +15,11 @@ public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 	private String description;
 	private ClipUNLPerson person;
 
+	private List<ClipUNLCurricularUnit> curricularUnits;
+
 	public ClipUNLAcademicYearImpl(ClipUNLSession session) {
 		super(session);
+		curricularUnits = null;
 	}
 
 	public String getYear() {
@@ -53,7 +56,12 @@ public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 
 	@Override
 	public List<ClipUNLCurricularUnit> getCurricularUnits() {
-		return ClipUNLCurricularUnitScraper.getCurricularUnits(getSession(), this);
+		if (curricularUnits == null) {
+			curricularUnits = ClipUNLCurricularUnitScraper.getCurricularUnits(
+					getSession(), this);
+		}
+
+		return curricularUnits;
 	}
 
 }
