@@ -26,9 +26,10 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 			+ ")) a[href^="
 			+ ClipUNLPath.STUDENT_ACADEMIC_YEAR.getCode() + "?]";
 
-	public static List<ClipUNLAcademicYear> getAcademicYears(
-			ClipUNLSession session, ClipUNLPerson person) {
+	public static List<ClipUNLAcademicYear> getAcademicYears(ClipUNLPerson person) {
 
+		final ClipUNLSession session = person.getSession();
+		
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}

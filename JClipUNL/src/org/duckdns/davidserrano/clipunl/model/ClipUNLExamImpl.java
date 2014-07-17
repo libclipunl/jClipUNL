@@ -4,7 +4,7 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.joda.time.DateTime;
 
-public class ClipUNLExamImpl extends ClipUNLBaseModel implements ClipUNLExam {
+public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements ClipUNLExam {
 
 	private static final long serialVersionUID = -7719774857248111839L;
 

@@ -6,7 +6,7 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLAcademicYearScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
-public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
+public class ClipUNLPersonImpl extends ClipUNLBaseModelImpl implements
 		ClipUNLPerson {
 	private static final long serialVersionUID = -6852564565366259034L;
 
@@ -51,8 +51,7 @@ public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
 	@Override
 	public List<ClipUNLAcademicYear> getAcademicYears() {
 		if (years == null) {
-			years = ClipUNLAcademicYearScraper.getAcademicYears(getSession(),
-					this);
+			years = ClipUNLAcademicYearScraper.getAcademicYears(this);
 		}
 
 		return years;

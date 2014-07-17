@@ -1,6 +1,7 @@
 package org.duckdns.davidserrano.clipunl.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,7 +11,7 @@ import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLDocumentScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
-public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
+public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModelImpl implements
 		ClipUNLCurricularUnit {
 
 	private static final long serialVersionUID = 4968251116633463502L;
@@ -87,10 +88,34 @@ public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
 	}
 
 	@Override
+	public List<ClipUNLDocument> getDocuments(ClipUNLDocumentType documentType) {
+		if (documentsByType == null) {
+			documentsByType = new LinkedHashMap<ClipUNLDocumentType, List<ClipUNLDocument>>(
+					ClipUNLDocumentType.values().length);
+		}
+
+		if (!documentsByType.containsKey(documentType)) {
+			documentsByType.put(documentType,
+					ClipUNLDocumentScraper.getDocuments(this, documentType));
+		}
+
+		return documentsByType.get(documentType);
+	}
+
+	@Override
 	public Map<ClipUNLDocumentType, List<ClipUNLDocument>> getDocumentsByType() {
 		if (documentsByType == null) {
-			documentsByType = ClipUNLDocumentScraper.getDocumentsByType(
-					getSession(), this);
+			documentsByType = new LinkedHashMap<ClipUNLDocumentType, List<ClipUNLDocument>>(
+					ClipUNLDocumentType.values().length);
+		}
+
+		for (final ClipUNLDocumentType documentType : ClipUNLDocumentType
+				.values()) {
+			if (!documentsByType.containsKey(documentType)) {
+				documentsByType
+						.put(documentType, ClipUNLDocumentScraper.getDocuments(
+								this, documentType));
+			}
 		}
 
 		return documentsByType;

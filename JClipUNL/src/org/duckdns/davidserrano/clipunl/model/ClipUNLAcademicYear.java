@@ -3,7 +3,7 @@ package org.duckdns.davidserrano.clipunl.model;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ClipUNLAcademicYear extends Serializable {
+public interface ClipUNLAcademicYear extends ClipUNLBaseModel, Serializable {
 	abstract public String getYear();
 	
 	abstract public String getURL();

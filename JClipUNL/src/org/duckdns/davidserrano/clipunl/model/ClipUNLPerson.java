@@ -3,7 +3,7 @@ package org.duckdns.davidserrano.clipunl.model;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ClipUNLPerson extends Serializable {
+public interface ClipUNLPerson extends ClipUNLBaseModel, Serializable {
 
 	public abstract String getRole();
 

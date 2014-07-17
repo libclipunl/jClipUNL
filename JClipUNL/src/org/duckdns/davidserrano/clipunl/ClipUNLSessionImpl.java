@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLPeopleScraper;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 
@@ -18,16 +21,19 @@ public class ClipUNLSessionImpl extends ClipUNLScraper implements Serializable,
 
 	private String fullName;
 
+	private List<ClipUNLPerson> people;
+
 	private ClipUNLSessionImpl() {
 		super();
 		cookies = Collections.emptyMap();
 		fullName = null;
+		people = null;
 	}
 
 	public ClipUNLSessionImpl(String cookiesStr)
 			throws UnsupportedEncodingException {
 		this();
-		
+
 		cookies = new LinkedHashMap<String, String>();
 		for (final String pair : cookiesStr.split("&")) {
 			final String[] splitPair = pair.split("=");
@@ -77,5 +83,14 @@ public class ClipUNLSessionImpl extends ClipUNLScraper implements Serializable,
 		data.put(ClipUNLParameterType.PASSWORD, password);
 
 		getDocument(this, ClipUNLPath.HOME, data);
+	}
+
+	@Override
+	public List<ClipUNLPerson> getPeople() {
+		if (people == null) {
+			people = ClipUNLPeopleScraper.getPeople(this);
+		}
+
+		return people;
 	}
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 
-public interface ClipUNLDocument extends Serializable {
+public interface ClipUNLDocument extends ClipUNLBaseModel, Serializable {
 
 	public abstract String getOid();
 

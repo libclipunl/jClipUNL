@@ -3,7 +3,7 @@ package org.duckdns.davidserrano.clipunl.model;
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPeriodType;
 
-public class ClipUNLPeriodImpl extends ClipUNLBaseModel implements
+public class ClipUNLPeriodImpl extends ClipUNLBaseModelImpl implements
 		ClipUNLPeriod {
 	private static final long serialVersionUID = -4926884020349768719L;
 

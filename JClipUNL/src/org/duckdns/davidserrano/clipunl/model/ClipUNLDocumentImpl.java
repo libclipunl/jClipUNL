@@ -1,13 +1,11 @@
 package org.duckdns.davidserrano.clipunl.model;
 
-import java.io.Serializable;
-
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
-public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
-		Serializable, ClipUNLDocument {
+public class ClipUNLDocumentImpl extends ClipUNLBaseModelImpl implements
+		ClipUNLDocument {
 
 	private static final long serialVersionUID = -8001382898325022999L;
 
@@ -95,5 +93,4 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
 	}
-
 }

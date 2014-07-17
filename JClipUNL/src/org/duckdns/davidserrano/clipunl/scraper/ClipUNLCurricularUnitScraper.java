@@ -32,7 +32,9 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 			+ ClipUNLPath.STUDENT_CURRICULAR_UNITS.getCode() + "?]";
 
 	public static List<ClipUNLCurricularUnit> getCurricularUnits(
-			ClipUNLSession session, ClipUNLAcademicYear academicYear) {
+			final ClipUNLAcademicYear academicYear) {
+		final ClipUNLSession session = academicYear.getSession();
+
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}

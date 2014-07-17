@@ -28,67 +28,61 @@ public class ClipUNLDocumentScraper extends ClipUNLScraper {
 			+ "] img[src="
 			+ ClipUNLConstants.CLIP_DL_IMAGE + "])";
 
-	public static Map<ClipUNLDocumentType, List<ClipUNLDocument>> getDocumentsByType(
-			final ClipUNLSession session,
-			final ClipUNLCurricularUnit curricularUnit) {
+	public static List<ClipUNLDocument> getDocuments(
+			final ClipUNLCurricularUnit curricularUnit,
+			final ClipUNLDocumentType documentType) {
+
+		final ClipUNLSession session = curricularUnit.getSession();
 
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}
+
+		final Map<ClipUNLParameterType, String> data = new LinkedHashMap<ClipUNLParameterType, String>();
+
 		final ClipUNLAcademicYear academicYear = curricularUnit
 				.getAcademicYear();
 		final ClipUNLPerson person = academicYear.getPerson();
 		final ClipUNLPeriod period = curricularUnit.getPeriod();
 
-		final Map<ClipUNLDocumentType, List<ClipUNLDocument>> documentsByType = new LinkedHashMap<ClipUNLDocumentType, List<ClipUNLDocument>>();
+		data.put(ClipUNLParameterType.ACADEMIC_YEAR, academicYear.getYear());
+		data.put(ClipUNLParameterType.STUDENT, person.getId());
+		data.put(ClipUNLParameterType.CURRICULAR_UNIT, curricularUnit.getId());
+		data.put(ClipUNLParameterType.PERIOD, period.getPeriod());
+		data.put(ClipUNLParameterType.PERIOD_TYPE, period.getPeriodType()
+				.getCode());
+		data.put(ClipUNLParameterType.UNIT_DOCTYPE, documentType.getCode());
 
-		for (final ClipUNLDocumentType documentType : ClipUNLDocumentType
-				.values()) {
+		final Document document = getDocument(session,
+				ClipUNLPath.STUDENT_DOCUMENTS, data, Method.GET);
 
-			final Map<ClipUNLParameterType, String> data = new LinkedHashMap<ClipUNLParameterType, String>();
+		final Elements lines = document.select(DOCUMENT_LINES_SELECTOR);
 
-			data.put(ClipUNLParameterType.ACADEMIC_YEAR, academicYear.getYear());
-			data.put(ClipUNLParameterType.STUDENT, person.getId());
-			data.put(ClipUNLParameterType.CURRICULAR_UNIT,
-					curricularUnit.getId());
-			data.put(ClipUNLParameterType.PERIOD, period.getPeriod());
-			data.put(ClipUNLParameterType.PERIOD_TYPE, period.getPeriodType()
-					.getCode());
-			data.put(ClipUNLParameterType.UNIT_DOCTYPE, documentType.getCode());
+		final List<ClipUNLDocument> clipDocuments = new ArrayList<ClipUNLDocument>();
 
-			final Document document = getDocument(session,
-					ClipUNLPath.STUDENT_DOCUMENTS, data, Method.GET);
+		if (lines.size() > 1) {
 
-			final Elements lines = document.select(DOCUMENT_LINES_SELECTOR);
+			for (final Element line : lines.subList(1, lines.size())) {
+				final ClipUNLDocumentImpl clipDocument = new ClipUNLDocumentImpl(
+						session);
 
-			final List<ClipUNLDocument> clipDocuments = new ArrayList<ClipUNLDocument>();
+				final String name = line.child(0).text();
+				final String url = line.child(1).select("a").attr("href");
+				final String date = line.child(2).text();
+				final String size = line.child(3).text();
+				final String teacher = line.child(4).text();
 
-			if (lines.size() > 1) {
+				clipDocument.setDocumentType(documentType);
+				clipDocument.setName(name);
+				clipDocument.setURL(url);
+				clipDocument.setDate(date);
+				clipDocument.setSize(size);
+				clipDocument.setTeacher(teacher);
 
-				for (final Element line : lines.subList(1, lines.size())) {
-					final ClipUNLDocumentImpl clipDocument = new ClipUNLDocumentImpl(
-							session);
-
-					final String name = line.child(0).text();
-					final String url = line.child(1).select("a").attr("href");
-					final String date = line.child(2).text();
-					final String size = line.child(3).text();
-					final String teacher = line.child(4).text();
-
-					clipDocument.setDocumentType(documentType);
-					clipDocument.setName(name);
-					clipDocument.setURL(url);
-					clipDocument.setDate(date);
-					clipDocument.setSize(size);
-					clipDocument.setTeacher(teacher);
-
-					clipDocuments.add(clipDocument);
-				}
+				clipDocuments.add(clipDocument);
 			}
-
-			documentsByType.put(documentType, clipDocuments);
 		}
 
-		return documentsByType;
+		return clipDocuments;
 	}
 }

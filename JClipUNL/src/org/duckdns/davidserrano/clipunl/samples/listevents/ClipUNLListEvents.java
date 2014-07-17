@@ -61,8 +61,7 @@ public class ClipUNLListEvents {
 	}
 
 	private static final void listPeople(ClipUNLSession session) {
-		final List<ClipUNLPerson> people = ClipUNLPeopleScraper
-				.getPeople(session);
+		final List<ClipUNLPerson> people = session.getPeople();
 
 		for (final ClipUNLPerson person : people) {
 			System.out.println(person.getDescription());
