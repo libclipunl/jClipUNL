@@ -4,20 +4,48 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.ClipUNLSessionFactory;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLPeopleScraper;
 
 public class ClipUNLListEvents {
+
+	private static void listDocuments(ClipUNLCurricularUnit curricularUnit) {
+		final Map<ClipUNLDocumentType, List<ClipUNLDocument>> documentsByType = curricularUnit
+				.getDocumentsByType();
+
+		for (final Entry<ClipUNLDocumentType, List<ClipUNLDocument>> entry : documentsByType
+				.entrySet()) {
+			final ClipUNLDocumentType documentType = entry.getKey();
+			final List<ClipUNLDocument> documents = entry.getValue();
+
+			if (documents.size() > 0) {
+				System.out.println("\t\t\t" + documentType.getLabel() + "("
+						+ documents.size() + ")");
+
+				for (final ClipUNLDocument document : documents) {
+					System.out.println("\t\t\t\t" + document.getName() + "\t"
+							+ document.getTeacher() + " " + document.getURL());
+				}
+			}
+		}
+	}
+
 	private static void listCurricularUnits(ClipUNLAcademicYear academicYear) {
-		final List<ClipUNLCurricularUnit> curricularUnits = academicYear.getCurricularUnits();
-		
+		final List<ClipUNLCurricularUnit> curricularUnits = academicYear
+				.getCurricularUnits();
+
 		for (final ClipUNLCurricularUnit curricularUnit : curricularUnits) {
 			System.out.println("\t\t" + curricularUnit.getName());
+			listDocuments(curricularUnit);
 		}
 
 	}

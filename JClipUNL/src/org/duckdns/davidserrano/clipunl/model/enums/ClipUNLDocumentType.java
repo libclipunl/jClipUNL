@@ -18,11 +18,11 @@ public enum ClipUNLDocumentType {
 	OTHERS("xot", "Outros");
 
 	private String code;
-	private String description;
+	private String label;
 
-	ClipUNLDocumentType(final String code, final String description) {
+	ClipUNLDocumentType(final String code, final String label) {
 		this.code = code;
-		this.description = description;
+		this.label = label;
 	}
 
 	public static ClipUNLDocumentType from(final String code) {
@@ -39,7 +39,7 @@ public enum ClipUNLDocumentType {
 		return code;
 	}
 
-	public String getDescrition() {
-		return description;
+	public String getLabel() {
+		return label;
 	}
 }

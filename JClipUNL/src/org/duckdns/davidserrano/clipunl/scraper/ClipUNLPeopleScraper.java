@@ -29,7 +29,7 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 		}
 
 		final Document document = getDocument(session, ClipUNLPath.HOME);
-		final List<ClipUNLPerson> people = new ArrayList<>();
+		final List<ClipUNLPerson> people = new ArrayList<ClipUNLPerson>();
 
 		// Find the student anchors
 		final Elements elements = document.select(PEOPLE_ANCHOR_SELECTOR);

@@ -1,10 +1,10 @@
 package org.duckdns.davidserrano.clipunl.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
+import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
 public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 		Serializable, ClipUNLDocument {
@@ -16,8 +16,8 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 	private String name;
 	private String url;
 	private ClipUNLDocumentType documentType;
-	private Date date;
-	private long size;
+	private String date;
+	private String size;
 	private String teacher;
 
 	public ClipUNLDocumentImpl(ClipUNLSession session) {
@@ -53,7 +53,7 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 
 	@Override
 	public String getURL() {
-		return url;
+		return ClipUNLConstants.CLIP_SERVER + url;
 	}
 
 	public void setURL(String url) {
@@ -70,20 +70,20 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements
 	}
 
 	@Override
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
 	@Override
-	public long getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(long size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 

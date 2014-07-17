@@ -1,12 +1,17 @@
 package org.duckdns.davidserrano.clipunl.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLDocumentScraper;
+import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
 public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
-		Serializable, ClipUNLCurricularUnit {
+		ClipUNLCurricularUnit {
 
 	private static final long serialVersionUID = 4968251116633463502L;
 
@@ -15,6 +20,8 @@ public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
 	private String name;
 	private String id;
 	private ClipUNLPeriod period;
+
+	private Map<ClipUNLDocumentType, List<ClipUNLDocument>> documentsByType;
 
 	public ClipUNLCurricularUnitImpl(ClipUNLSession session) {
 		super(session);
@@ -27,7 +34,7 @@ public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
 
 	@Override
 	public String getUrl() {
-		return url;
+		return ClipUNLConstants.CLIP_SERVER + url;
 	}
 
 	@Override
@@ -47,8 +54,16 @@ public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
 
 	@Override
 	public List<ClipUNLDocument> getDocuments() {
-		// TODO me
-		return null;
+		final Map<ClipUNLDocumentType, List<ClipUNLDocument>> documentsByType = getDocumentsByType();
+		final List<ClipUNLDocument> documents = new ArrayList<ClipUNLDocument>();
+
+		for (final Entry<ClipUNLDocumentType, List<ClipUNLDocument>> entry : documentsByType
+				.entrySet()) {
+
+			documents.addAll(entry.getValue());
+		}
+
+		return documents;
 	}
 
 	public void setAcademicYear(ClipUNLAcademicYear academicYear) {
@@ -69,5 +84,15 @@ public class ClipUNLCurricularUnitImpl extends ClipUNLBaseModel implements
 
 	public void setPeriod(ClipUNLPeriod period) {
 		this.period = period;
+	}
+
+	@Override
+	public Map<ClipUNLDocumentType, List<ClipUNLDocument>> getDocumentsByType() {
+		if (documentsByType == null) {
+			documentsByType = ClipUNLDocumentScraper.getDocumentsByType(
+					getSession(), this);
+		}
+
+		return documentsByType;
 	}
 }

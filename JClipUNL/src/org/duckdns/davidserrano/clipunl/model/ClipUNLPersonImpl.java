@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLAcademicYearScraper;
+import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
 public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
 		ClipUNLPerson {
@@ -31,7 +32,7 @@ public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
 
 	@Override
 	public String getURL() {
-		return url;
+		return ClipUNLConstants.CLIP_SERVER + url;
 	}
 
 	public void setURL(String url) {

@@ -62,6 +62,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 			final ClipUNLCurricularUnitImpl curricularUnit = new ClipUNLCurricularUnitImpl(
 					session);
 
+			final String id;
 			final String url = element.attr("href");
 			final String name = element.text();
 			final ClipUNLPeriod period;
@@ -70,6 +71,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 				final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil
 						.splitQueryString(url);
 
+				id = qsMap.get(ClipUNLParameterType.UNIT);
 				final String periodStr = qsMap.get(ClipUNLParameterType.PERIOD);
 				final ClipUNLPeriodType periodType = ClipUNLPeriodType
 						.from(qsMap.get(ClipUNLParameterType.PERIOD_TYPE));
@@ -81,6 +83,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 						ClipUNLPath.STUDENT_ACADEMIC_YEAR);
 			}
 
+			curricularUnit.setId(id);
 			curricularUnit.setAcademicYear(academicYear);
 			curricularUnit.setUrl(url);
 			curricularUnit.setName(name);

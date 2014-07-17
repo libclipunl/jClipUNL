@@ -2,8 +2,10 @@ package org.duckdns.davidserrano.clipunl.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.jsoup.nodes.Document;
@@ -18,6 +20,33 @@ public class ClipUNLUtil {
 		} else {
 			return null;
 		}
+	}
+
+	public static String buildQueryString(Map<ClipUNLParameterType, String> map) {
+		String queryString = "";
+
+		for (final Entry<ClipUNLParameterType, String> entry : map.entrySet()) {
+			try {
+				final String key = URLEncoder.encode(entry.getKey().getCode(),
+						ClipUNLConstants.CLIP_ENCODING);
+
+				final String value = URLEncoder.encode(entry.getValue(),
+						ClipUNLConstants.CLIP_ENCODING);
+				
+				final String pair = key + "=" + value;
+				
+				if (queryString.isEmpty()) {
+					queryString = pair;
+				} else {
+					queryString += "&" + pair;
+				}
+				
+			} catch (UnsupportedEncodingException e) {
+				return null;
+			}
+		}
+
+		return queryString;
 	}
 
 	/*

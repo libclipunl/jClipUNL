@@ -17,7 +17,7 @@ public enum ClipUNLParameterType {
 	
 	STUDENT("aluno"),
 	
-	UNIT_DOCTYPE("tipo_de_document_unidade"), ;
+	UNIT_DOCTYPE("tipo_de_documento_de_unidade"), ;
 	
 	private String code;
 	
