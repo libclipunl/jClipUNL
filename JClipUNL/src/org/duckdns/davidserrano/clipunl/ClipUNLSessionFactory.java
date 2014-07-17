@@ -3,8 +3,6 @@ package org.duckdns.davidserrano.clipunl;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
-import org.duckdns.davidserrano.clipunl.impl.ClipUNLSessionImpl;
-
 public class ClipUNLSessionFactory implements Serializable {
 	private static final long serialVersionUID = -3802958103464356532L;
 

@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.impl;
+package org.duckdns.davidserrano.clipunl;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -6,12 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.duckdns.davidserrano.clipunl.ClipUNLSession;
-import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLScrapper;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 
-public class ClipUNLSessionImpl extends ClipUNLScrapper implements
+public class ClipUNLSessionImpl extends ClipUNLScraper implements
 		Serializable, ClipUNLSession {
 	private static final long serialVersionUID = 1018884267769939415L;
 	private Map<String, String> cookies;

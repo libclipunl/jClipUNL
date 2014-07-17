@@ -1,11 +1,9 @@
-package org.duckdns.davidserrano.clipunl.model.impl;
+package org.duckdns.davidserrano.clipunl.model;
 
 import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
-import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLAcademicYearScrapper;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLAcademicYearScraper;
 
 public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
 		ClipUNLPerson {
@@ -52,7 +50,7 @@ public class ClipUNLPersonImpl extends ClipUNLBaseModel implements
 	@Override
 	public List<ClipUNLAcademicYear> getAcademicYears() {
 		if (years == null) {
-			years = ClipUNLAcademicYearScrapper.getAcademicYears(getSession(),
+			years = ClipUNLAcademicYearScraper.getAcademicYears(getSession(),
 					this);
 		}
 

@@ -1,8 +1,8 @@
-package org.duckdns.davidserrano.clipunl.model.impl;
+package org.duckdns.davidserrano.clipunl.model;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 
-public abstract class ClipUNLBaseModel {
+public class ClipUNLBaseModel {
 	private ClipUNLSession session;
 	
 	public ClipUNLBaseModel(ClipUNLSession session) {

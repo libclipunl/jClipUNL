@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.scrapper;
+package org.duckdns.davidserrano.clipunl.scraper;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYearImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
-import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLAcademicYearImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.Connection.Method;
@@ -19,7 +19,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class ClipUNLAcademicYearScrapper extends ClipUNLScrapper {
+public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 	private final static String ACADEMIC_YEARS_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_ACADEMIC_YEAR_LABEL
 			+ ")) a[href^="

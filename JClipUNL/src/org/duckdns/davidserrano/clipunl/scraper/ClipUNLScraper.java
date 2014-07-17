@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.scrapper;
+package org.duckdns.davidserrano.clipunl.scraper;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class ClipUNLScrapper {
+public class ClipUNLScraper {
 
 	protected static Document lastDocument;
 

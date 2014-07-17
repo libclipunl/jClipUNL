@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.scrapper;
+package org.duckdns.davidserrano.clipunl.scraper;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
-import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPersonImpl;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPersonImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class ClipUNLPeopleScrapper extends ClipUNLScrapper {
+public class ClipUNLPeopleScraper extends ClipUNLScraper {
 	private final static String PEOPLE_ANCHOR_SELECTOR = "table:has(span.h3:containsOwn("
 			+ ClipUNLConstants.CLIP_STUDENT_LABEL
 			+ ")) a[href^="

@@ -1,11 +1,9 @@
-package org.duckdns.davidserrano.clipunl.model.impl;
+package org.duckdns.davidserrano.clipunl.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 
 public class ClipUNLDocumentImpl extends ClipUNLBaseModel implements

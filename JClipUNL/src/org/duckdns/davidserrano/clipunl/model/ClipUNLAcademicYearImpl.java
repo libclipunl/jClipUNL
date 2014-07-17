@@ -1,7 +1,8 @@
-package org.duckdns.davidserrano.clipunl.model.impl;
+package org.duckdns.davidserrano.clipunl.model;
+
+import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 
 public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 		ClipUNLAcademicYear {
@@ -37,5 +38,11 @@ public class ClipUNLAcademicYearImpl extends ClipUNLBaseModel implements
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public List<ClipUNLCurricularUnit> getCurricularUnits() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

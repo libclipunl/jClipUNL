@@ -8,21 +8,32 @@ import java.util.List;
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.ClipUNLSessionFactory;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
-import org.duckdns.davidserrano.clipunl.scrapper.ClipUNLPeopleScrapper;
+import org.duckdns.davidserrano.clipunl.scraper.ClipUNLPeopleScraper;
 
 public class ClipUNLListEvents {
-	public static final void listAcademicYears(ClipUNLPerson person) {
-		final List<ClipUNLAcademicYear> academicYears = person
-				.getAcademicYears();
-		for (final ClipUNLAcademicYear academicYear : academicYears) {
-			System.out.println("\t" + academicYear.getDescription());
+	private static void listCurricularUnits(ClipUNLAcademicYear academicYear) {
+		final List<ClipUNLCurricularUnit> curricularUnits = academicYear.getCurricularUnits();
+		
+		for (final ClipUNLCurricularUnit curricularUnit : curricularUnits) {
+			System.out.println("\t\t" + curricularUnit.getName());
 		}
 
 	}
 
-	public static final void listPeople(ClipUNLSession session) {
-		final List<ClipUNLPerson> people = ClipUNLPeopleScrapper
+	private static final void listAcademicYears(ClipUNLPerson person) {
+		final List<ClipUNLAcademicYear> academicYears = person
+				.getAcademicYears();
+		for (final ClipUNLAcademicYear academicYear : academicYears) {
+			System.out.println("\t" + academicYear.getDescription());
+			listCurricularUnits(academicYear);
+		}
+
+	}
+
+	private static final void listPeople(ClipUNLSession session) {
+		final List<ClipUNLPerson> people = ClipUNLPeopleScraper
 				.getPeople(session);
 
 		for (final ClipUNLPerson person : people) {
@@ -48,7 +59,7 @@ public class ClipUNLListEvents {
 			password = reader.readLine();
 
 			session = ClipUNLSessionFactory.getSession(identifier, password);
-			
+
 			if (session.isLoggedIn()) {
 				System.out.println("Welcome " + session.getFullName());
 			} else {

@@ -1,8 +1,6 @@
-package org.duckdns.davidserrano.clipunl.model.impl;
+package org.duckdns.davidserrano.clipunl.model;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLExam;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.joda.time.DateTime;
 
