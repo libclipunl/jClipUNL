@@ -8,9 +8,10 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLPersonImpl;
+import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLPersonDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPersonImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.nodes.Document;
@@ -61,7 +62,7 @@ public class ClipUNLPeopleScraper extends ClipUNLScraper {
 			person.setDescription(description);
 			person.setURL(url);
 
-			people.add(person);
+			people.add(new ClipUNLPersonDTO(person));
 		}
 
 		return people;

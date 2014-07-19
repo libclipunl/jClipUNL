@@ -11,13 +11,14 @@ import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnitImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriodImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLCurricularUnitDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPeriodType;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLCurricularUnitImpl;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPeriodImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.Connection.Method;
@@ -91,7 +92,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 			curricularUnit.setName(name);
 			curricularUnit.setPeriod(period);
 
-			curricularUnits.add(curricularUnit);
+			curricularUnits.add(new ClipUNLCurricularUnitDTO(curricularUnit));
 		}
 
 		return curricularUnits;

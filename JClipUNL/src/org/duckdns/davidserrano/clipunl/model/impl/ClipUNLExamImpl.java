@@ -1,10 +1,13 @@
-package org.duckdns.davidserrano.clipunl.model;
+package org.duckdns.davidserrano.clipunl.model.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLExam;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLExamScraper;

@@ -10,14 +10,15 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLExam;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLExamImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriodImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLPeriodDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLExamSeason;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPeriodType;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLExamImpl;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLPeriodImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.Connection.Method;
 import org.jsoup.nodes.Document;
@@ -63,8 +64,8 @@ public class ClipUNLExamScraper extends ClipUNLScraper {
 						.from(qsMap.get(ClipUNLParameterType.PERIOD_TYPE));
 
 				if (period != null && periodType != null) {
-					periods.add(new ClipUNLPeriodImpl(session, period,
-							periodType));
+					periods.add(new ClipUNLPeriodDTO(new ClipUNLPeriodImpl(
+							session, period, periodType)));
 				}
 			} catch (UnsupportedEncodingException e) {
 
@@ -174,11 +175,11 @@ public class ClipUNLExamScraper extends ClipUNLScraper {
 
 		final Document document = getDocument(session,
 				ClipUNLPath.STUDENT_CALENDAR, data, Method.GET);
-		
+
 		final Elements lines = document.select(LOCATIONS_LIST_ITEM_SELECTOR);
-		
+
 		final List<String> locations = new ArrayList<String>();
-		
+
 		for (final Element line : lines) {
 			locations.add(line.text());
 		}

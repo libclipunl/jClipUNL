@@ -9,10 +9,11 @@ import org.duckdns.davidserrano.clipunl.ClipUNLSession;
 import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYearImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLAcademicYearDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLAcademicYearImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLUtil;
 import org.jsoup.Connection.Method;
@@ -26,10 +27,11 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 			+ ")) a[href^="
 			+ ClipUNLPath.STUDENT_ACADEMIC_YEAR.getPath() + "?]";
 
-	public static List<ClipUNLAcademicYear> getAcademicYears(ClipUNLPerson person) {
+	public static List<ClipUNLAcademicYear> getAcademicYears(
+			ClipUNLPerson person) {
 
 		final ClipUNLSession session = person.getSession();
-		
+
 		if (!session.isLoggedIn()) {
 			throw new NotLoggedInException();
 		}
@@ -72,7 +74,7 @@ public class ClipUNLAcademicYearScraper extends ClipUNLScraper {
 			academicYear.setURL(url);
 			academicYear.setYear(year);
 
-			years.add(academicYear);
+			years.add(new ClipUNLAcademicYearDTO(academicYear));
 		}
 
 		return years;

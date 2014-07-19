@@ -1,6 +1,7 @@
-package org.duckdns.davidserrano.clipunl.model;
+package org.duckdns.davidserrano.clipunl.model.impl;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPeriodType;
 
 public class ClipUNLPeriodImpl extends ClipUNLBaseModelImpl implements

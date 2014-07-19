@@ -1,11 +1,12 @@
 package org.duckdns.davidserrano.clipunl;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 
-public interface ClipUNLSession {
+public interface ClipUNLSession extends Serializable {
 
 	public abstract boolean isLoggedIn();
 

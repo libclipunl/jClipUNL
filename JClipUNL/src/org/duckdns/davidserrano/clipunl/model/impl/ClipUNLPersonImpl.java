@@ -1,8 +1,10 @@
-package org.duckdns.davidserrano.clipunl.model;
+package org.duckdns.davidserrano.clipunl.model.impl;
 
 import java.util.List;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLAcademicYearScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 

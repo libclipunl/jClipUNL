@@ -1,4 +1,4 @@
-package org.duckdns.davidserrano.clipunl.model;
+package org.duckdns.davidserrano.clipunl.model.impl;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.scraper.ClipUNLDocumentScraper;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;

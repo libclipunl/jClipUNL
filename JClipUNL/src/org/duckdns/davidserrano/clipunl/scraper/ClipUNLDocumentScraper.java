@@ -10,12 +10,13 @@ import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLDocumentImpl;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
+import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLDocumentDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLPath;
+import org.duckdns.davidserrano.clipunl.model.impl.ClipUNLDocumentImpl;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 import org.jsoup.Connection.Method;
 import org.jsoup.nodes.Document;
@@ -79,7 +80,7 @@ public class ClipUNLDocumentScraper extends ClipUNLScraper {
 				clipDocument.setSize(size);
 				clipDocument.setTeacher(teacher);
 
-				clipDocuments.add(clipDocument);
+				clipDocuments.add(new ClipUNLDocumentDTO(clipDocument));
 			}
 		}
 

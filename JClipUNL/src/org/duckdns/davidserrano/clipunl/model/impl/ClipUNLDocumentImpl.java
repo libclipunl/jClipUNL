@@ -1,6 +1,8 @@
-package org.duckdns.davidserrano.clipunl.model;
+package org.duckdns.davidserrano.clipunl.model.impl;
 
 import org.duckdns.davidserrano.clipunl.ClipUNLSession;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
+import org.duckdns.davidserrano.clipunl.model.ClipUNLDocument;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLDocumentType;
 import org.duckdns.davidserrano.clipunl.util.ClipUNLConstants;
 
