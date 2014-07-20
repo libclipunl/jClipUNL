@@ -11,7 +11,6 @@ import org.duckdns.davidserrano.clipunl.exceptions.NotLoggedInException;
 import org.duckdns.davidserrano.clipunl.exceptions.PageChangedException;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLAcademicYear;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLCurricularUnit;
-import org.duckdns.davidserrano.clipunl.model.ClipUNLPeriod;
 import org.duckdns.davidserrano.clipunl.model.ClipUNLPerson;
 import org.duckdns.davidserrano.clipunl.model.dto.ClipUNLCurricularUnitDTO;
 import org.duckdns.davidserrano.clipunl.model.enums.ClipUNLParameterType;
@@ -68,7 +67,7 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 			final String id;
 			final String url = element.attr("href");
 			final String name = element.text();
-			final ClipUNLPeriod period;
+			final ClipUNLPeriodImpl period;
 
 			try {
 				final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil
@@ -79,7 +78,10 @@ public class ClipUNLCurricularUnitScraper extends ClipUNLScraper {
 				final ClipUNLPeriodType periodType = ClipUNLPeriodType
 						.from(qsMap.get(ClipUNLParameterType.PERIOD_TYPE));
 
-				period = new ClipUNLPeriodImpl(session, periodStr, periodType);
+				period = new ClipUNLPeriodImpl(session);
+				period.setAcademicYear(academicYear);
+				period.setPeriod(periodStr);
+				period.setPeriodType(periodType);
 
 			} catch (UnsupportedEncodingException e) {
 				throw new PageChangedException(

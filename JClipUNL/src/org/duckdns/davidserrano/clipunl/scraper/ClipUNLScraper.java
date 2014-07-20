@@ -32,7 +32,9 @@ public class ClipUNLScraper {
 
 			if (method.equals(Method.GET)) {
 				String qs = ClipUNLUtil.buildQueryString(data);
-				url += "?" + qs;
+				if (!qs.isEmpty()) {
+					url += "?" + qs;
+				}
 			}
 
 			Connection connection = Jsoup.connect(url)
@@ -59,7 +61,9 @@ public class ClipUNLScraper {
 			return lastDocument;
 
 		} catch (IOException e) {
-			throw new NetworkErrorException(path);
+			NetworkErrorException ex = new NetworkErrorException(path);
+			ex.initCause(e);
+			throw ex;
 		}
 
 	}

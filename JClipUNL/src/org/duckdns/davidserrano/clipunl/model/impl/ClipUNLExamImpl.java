@@ -102,10 +102,11 @@ public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements
 
 	public void setURL(String url) {
 		this.url = url;
-		
+
 		try {
-			final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil.splitQueryString(url);
-		
+			final Map<ClipUNLParameterType, String> qsMap = ClipUNLUtil
+					.splitQueryString(url);
+
 			id = qsMap.get(ClipUNLParameterType.DETAILS);
 		} catch (UnsupportedEncodingException e) {
 		}
@@ -119,9 +120,75 @@ public class ClipUNLExamImpl extends ClipUNLBaseModelImpl implements
 	public void setPeriod(ClipUNLPeriod period) {
 		this.period = period;
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((academicYear == null) ? 0 : academicYear.hashCode());
+		result = prime
+				* result
+				+ ((curricularUnitName == null) ? 0 : curricularUnitName
+						.hashCode());
+		result = prime * result
+				+ ((examSeason == null) ? 0 : examSeason.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((interval == null) ? 0 : interval.hashCode());
+		result = prime * result
+				+ ((locations == null) ? 0 : locations.hashCode());
+		result = prime * result + ((period == null) ? 0 : period.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClipUNLExamImpl other = (ClipUNLExamImpl) obj;
+		if (academicYear == null) {
+			if (other.academicYear != null)
+				return false;
+		} else if (!academicYear.equals(other.academicYear))
+			return false;
+		if (curricularUnitName == null) {
+			if (other.curricularUnitName != null)
+				return false;
+		} else if (!curricularUnitName.equals(other.curricularUnitName))
+			return false;
+		if (examSeason != other.examSeason)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (interval == null) {
+			if (other.interval != null)
+				return false;
+		} else if (!interval.equals(other.interval))
+			return false;
+		if (locations == null) {
+			if (other.locations != null)
+				return false;
+		} else if (!locations.equals(other.locations))
+			return false;
+		if (period == null) {
+			if (other.period != null)
+				return false;
+		} else if (!period.equals(other.period))
+			return false;
+		return true;
+	}
+
 }

@@ -25,4 +25,10 @@ public interface ClipUNLCurricularUnit extends ClipUNLBaseModel, Serializable {
 
 	public abstract Map<ClipUNLDocumentType, List<ClipUNLDocument>> getDocumentsByType();
 
+	@Override
+	public boolean equals(Object obj);
+
+	@Override
+	public int hashCode();
+
 }

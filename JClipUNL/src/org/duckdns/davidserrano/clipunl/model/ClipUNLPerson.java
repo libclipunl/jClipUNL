@@ -15,4 +15,10 @@ public interface ClipUNLPerson extends ClipUNLBaseModel, Serializable {
 
 	public abstract List<ClipUNLAcademicYear> getAcademicYears();
 
+	@Override
+	public boolean equals(Object obj);
+
+	@Override
+	public int hashCode();
+
 }

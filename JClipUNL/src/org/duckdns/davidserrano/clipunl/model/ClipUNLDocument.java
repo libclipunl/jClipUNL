@@ -22,4 +22,10 @@ public interface ClipUNLDocument extends ClipUNLBaseModel, Serializable {
 
 	public abstract String getTeacher();
 
+	@Override
+	public boolean equals(Object obj);
+
+	@Override
+	public int hashCode();
+
 }

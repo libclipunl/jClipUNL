@@ -2,6 +2,7 @@ package org.duckdns.davidserrano.clipunl;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.Map.Entry;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -92,5 +93,47 @@ public class ClipUNLSessionImpl extends ClipUNLScraper implements Serializable,
 		}
 
 		return people;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cookies == null) ? 0 : cookies.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClipUNLSessionImpl other = (ClipUNLSessionImpl) obj;
+		if (cookies == null) {
+			if (other.cookies != null)
+				return false;
+		} else if (!cookies.equals(other.cookies))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String getCookieString() {
+		String cookieStr = "";
+
+		if (cookies != null) {
+			for (final Entry<String, String> entry : cookies.entrySet()) {
+				cookieStr += entry.getKey() + "=" + entry.getValue() + "; ";
+			}
+
+			if (!cookieStr.isEmpty()) {
+				cookieStr = cookieStr.substring(0, cookieStr.length() - 2);
+			}
+		}
+
+		return cookieStr;
 	}
 }

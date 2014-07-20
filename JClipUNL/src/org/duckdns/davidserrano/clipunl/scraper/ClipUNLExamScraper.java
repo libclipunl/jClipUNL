@@ -64,8 +64,14 @@ public class ClipUNLExamScraper extends ClipUNLScraper {
 						.from(qsMap.get(ClipUNLParameterType.PERIOD_TYPE));
 
 				if (period != null && periodType != null) {
-					periods.add(new ClipUNLPeriodDTO(new ClipUNLPeriodImpl(
-							session, period, periodType)));
+					ClipUNLPeriodImpl periodImpl = new ClipUNLPeriodImpl(
+							session);
+
+					periodImpl.setAcademicYear(academicYear);
+					periodImpl.setPeriod(period);
+					periodImpl.setPeriodType(periodType);
+
+					periods.add(new ClipUNLPeriodDTO(periodImpl));
 				}
 			} catch (UnsupportedEncodingException e) {
 

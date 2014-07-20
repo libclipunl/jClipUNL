@@ -20,4 +20,10 @@ public interface ClipUNLAcademicYear extends ClipUNLBaseModel, Serializable {
 	public abstract List<ClipUNLExam> getExams(ClipUNLPeriod period);
 
 	public abstract Map<ClipUNLPeriod, List<ClipUNLExam>> getExamsByPeriod();
+	
+	@Override
+	public boolean equals(Object obj);
+	
+	@Override
+	public int hashCode();
 }

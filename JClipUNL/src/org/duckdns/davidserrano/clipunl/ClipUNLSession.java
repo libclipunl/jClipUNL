@@ -17,4 +17,6 @@ public interface ClipUNLSession extends Serializable {
 	public abstract String getFullName();
 
 	public abstract List<ClipUNLPerson> getPeople();
+	
+	public abstract String getCookieString();
 }

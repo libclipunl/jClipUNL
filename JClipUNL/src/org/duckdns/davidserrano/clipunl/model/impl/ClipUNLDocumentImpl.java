@@ -95,4 +95,65 @@ public class ClipUNLDocumentImpl extends ClipUNLBaseModelImpl implements
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((curricularUnit == null) ? 0 : curricularUnit.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result
+				+ ((documentType == null) ? 0 : documentType.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((oid == null) ? 0 : oid.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClipUNLDocumentImpl other = (ClipUNLDocumentImpl) obj;
+		if (curricularUnit == null) {
+			if (other.curricularUnit != null)
+				return false;
+		} else if (!curricularUnit.equals(other.curricularUnit))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (documentType != other.documentType)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (oid == null) {
+			if (other.oid != null)
+				return false;
+		} else if (!oid.equals(other.oid))
+			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
+		if (teacher == null) {
+			if (other.teacher != null)
+				return false;
+		} else if (!teacher.equals(other.teacher))
+			return false;
+		return true;
+	}
+
 }

@@ -19,8 +19,14 @@ public interface ClipUNLExam extends ClipUNLBaseModel, Serializable {
 	public abstract ClipUNLAcademicYear getAcademicYear();
 
 	public abstract String getURL();
-	
+
 	public abstract String getId();
 
 	public abstract ClipUNLPeriod getPeriod();
+
+	@Override
+	public boolean equals(Object obj);
+
+	@Override
+	public int hashCode();
 }
